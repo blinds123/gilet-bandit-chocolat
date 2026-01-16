@@ -210,10 +210,22 @@ Founder story with 5 elements. **DO NOT label these explicitly in copy:**
 
 ## ENGAGE Framework (Perry Belcher)
 
-8 pattern interrupt types - use throughout copy:
+**CRITICAL FOR FASHION/APPAREL:**
+If the product is fashion (clothing, shoes, accessories), you are **MANDATED** to use the specialized training manual:
+`~/.gemini/antigravity/skills/brunson-protocol/resources/ENGAGE-FASHION-GENZ.md`
 
-| Type             | Example                                       |
-| ---------------- | --------------------------------------------- |
+**You must READ and APPLY the 6-step Fashion Formula from that file:**
+1. **E** - Exploit Cognitive Disruption
+2. **N** - Narrate an Unfinished Story
+3. **G** - Give a Controversial Truth
+4. **A** - Attach High-Stakes Personal Conflict
+5. **G** - Guarantee Unconventional Payoff
+6. **E** - Embed Time-Locked Curiosity
+
+**For General Products (Default 8 Pattern Interrupts):**
+
+| Type | Example |
+| :--- | :--- |
 | Question         | "What if everything you knew was wrong?"      |
 | Contradiction    | "Everyone says X. They're wrong."             |
 | Shocking Stat    | "97% of women saw results in 30 days"         |
