@@ -16,14 +16,19 @@ This skill activates when the user requests:
 
 ## CRITICAL: First Action (Self-Healing Injection)
 
-**IMMEDIATELY after cloning/creating project, inject the corrected section files:**
+**IMMEDIATELY after cloning/creating project, inject the corrected files:**
 
 ```bash
 cp resources/sections/*.html sections/
-cp build.sh .
+cp resources/scripts/*.sh tests/
+mkdir -p tests context
 ```
 
-This ensures the correct file structure (11, 12, 13, 13b) regardless of template version.
+This ensures:
+
+- Correct section structure (11, 12, 13, 13b)
+- Validation scripts available in `tests/`
+- Workspace folders ready
 
 ## Required Inputs
 
@@ -75,11 +80,24 @@ Execute in order. Do NOT skip phases.
 
 ### Phase 0: Pre-Check
 
-- **Inject resources:** `cp resources/sections/*.html sections/`
+- **Inject resources:**
+  ```bash
+  cp resources/sections/*.html sections/
+  cp resources/scripts/*.sh tests/
+  chmod +x tests/*.sh
+  ```
+- Create workspace folders: `sections/`, `context/`, `tests/`
 - Verify images directory exists
 - Test competitor URL is accessible
-- Create workspace folders: `sections/`, `context/`
 - **Comparison Check:** If `images/comparison/` empty, note for config
+
+**Validation Scripts Now Available:**
+
+- `tests/validate-avatar.sh` - Blocks Phase 2 until avatar-profile.json complete
+- `tests/validate-reading-checklist.sh` - Blocks drafting until mandatory reads confirmed
+- `tests/lint-manuscript.sh` - Blocks config until manuscript has all frameworks
+- `tests/validate-config.sh` - Blocks build until config rules verified
+- `tests/validate-engage.sh` - Blocks deploy until pattern interrupts verified
 
 ### Phase 1: Research (CRITICAL)
 
@@ -98,28 +116,79 @@ Execute in order. Do NOT skip phases.
 **STOP and ask user to review research before proceeding.**
 
 ### Phase 1B: Deep Dive Avatar Research (THE PSYCHOLOGICAL LOCK)
-**MANDATORY:** You must perform the deep psychological audit before writing copy.
-1. Read: `~/.gemini/antigravity/skills/brunson-protocol/resources/DEEP-DIVE-AVATAR.md`
-2. Execute the research prompt mentally.
-3. **Generate Artifact:** Create `context/avatar-profile.json` with the full 7-section analysis.
-4. **Validation:** Ensure the JSON is valid and contains deep insights, not generic summaries.
 
+**MANDATORY:** You must perform the deep psychological audit before writing copy.
+
+1. **READ (Required):** `~/.claude/ralph-templates/brunson-protocol/resources/DEEP-DIVE-AVATAR.md`
+   - This is NOT optional. Open and read the entire file.
+   - Do NOT skip or skim sections.
+
+2. **Execute the research prompt** from that file mentally on your competitor research.
+
+3. **Generate Artifact:** Create `context/avatar-profile.json` with the full 7-section analysis:
+   - fears_and_frustrations
+   - biases_and_false_beliefs
+   - jargon_and_language
+   - aspirations_and_identity
+   - objection_matrix
+   - social_proof_triggers
+   - decision_factors
+
+4. **VALIDATION (Blocks Phase 2):**
+
+   ```bash
+   bash tests/validate-avatar.sh
+   ```
+
+   - ❌ FAIL = You CANNOT proceed to Phase 2
+   - ✅ PASS = Proceed to Phase 2
 
 ### Phase 2: Copy Drafting (THE INTERMEDIATE ARTIFACT)
 
 **CRITICAL RULE:** You are **FORBIDDEN** from writing copy directly into `product.config`.
 **REASON:** Configuration files kill creativity. You must write a manuscript first.
 
-1. **Create Manuscript:**
-   - Copy template: `cp ~/.gemini/antigravity/skills/brunson-protocol/resources/copy-manuscript.template.md context/copy-manuscript.md`
-   - Fill it out completely using `context/research-summary.md` as source.
+**STEP 0: MANDATORY READS (Enforced)**
+
+1. **READ (Required):** `context/COPY-REQUIREMENTS.md`
+   - This is NOT optional. Open and read the entire file.
+   - Do NOT skip the BANNED PHRASES section.
+   - Do NOT skip the AI PLACEHOLDER BUGS section.
+
+2. **IF Fashion Product - READ (Required):**
+   - `~/.claude/ralph-templates/brunson-protocol/resources/ENGAGE-FASHION-GENZ.md`
+   - Read ALL 60 examples across 6 ENGAGE sections.
+   - Generic patterns are BANNED for fashion.
+
+3. **Create Reading Checklist:**
+
+   ```bash
+   cat > context/reading-checklist.txt <<EOF
+   [X] Read COPY-REQUIREMENTS.md
+   [X] Read ENGAGE-FASHION-GENZ.md (if fashion)
+   [ ] Skipped ENGAGE (not fashion product)
+   EOF
+   ```
+
+4. **VALIDATION (Blocks Drafting):**
+
+   ```bash
+   bash tests/validate-reading-checklist.sh
+   ```
+
+   - ❌ FAIL = You CANNOT write manuscript
+   - ✅ PASS = Proceed to drafting
+
+**STEP 1: Create Manuscript**
+
+- Copy template: `cp ~/.claude/ralph-templates/brunson-protocol/resources/copy-manuscript.template.md context/copy-manuscript.md`
+- Fill it out completely using `context/research-summary.md` as source.
 
 2. **Self-Correction (The Ralph Loop):**
-   - **EXECUTE SCRIPT:** `bash tests/lint-manuscript.sh context/copy-manuscript.md`
-   - **Check Headlines:** Do they match the `ENGAGE-FASHION-GENZ.md` formulas?
+   - Review your `copy-manuscript.md`.
+   - **Check Headlines:** Does every headline use an ENGAGE pattern? (Question, Contradiction, Confession, etc.)
    - **Check Story:** Does the Epiphany Bridge follow the 5-step narrative arc?
    - **Check Secrets:** Do they address Objections (Vehicle/Internal/External)?
-   - **Refine:** If the script fails, you MUST rewrite key sections before proceeding.
 
 3. **Validation:**
    - Only proceed if the manuscript is "Editor Approved" by your own internal critique.
@@ -143,14 +212,22 @@ Execute in order. Do NOT skip phases.
 ### Phase 4: multi-Stage Validation (The Defense-in-Depth)
 
 **Layer 1: The Manuscript Linter (Pre-Config)**
+
 - **Action:** Run `bash tests/lint-manuscript.sh context/copy-manuscript.md`
 - **Check:** Verifies all 3 Secrets are filled, Epiphany Bridge has 5 steps, and Big Domino exists.
 - **Enforcement:** You CANNOT open `product.config` until this passes.
 
 **Layer 2: The Config Validator (Pre-Build)**
+
 - **Action:** Run `bash tests/validate-config.sh`
 - **Check:** Verifies critical variables (PRICE, GUARANTEE) match hardcoded values.
 - **Enforcement:** `build.sh` will auto-abort if variables are suspect.
+
+**Layer 3: The Image Source Validator (Pre-Build)**
+
+- **Action:** Run `bash tests/validate-images-source.sh`
+- **Check:** Enforces "UGC/Testimonial" images for features/secrets. Bans "Product" images.
+- **Enforcement:** `build.sh` will auto-abort if "polished" images are used in "authentic" slots.
 
 ### Phase 5: Build & Deploy
 
@@ -221,9 +298,10 @@ Founder story with 5 elements. **DO NOT label these explicitly in copy:**
 
 **CRITICAL FOR FASHION/APPAREL:**
 If the product is fashion (clothing, shoes, accessories), you are **MANDATED** to use the specialized training manual:
-`~/.gemini/antigravity/skills/brunson-protocol/resources/ENGAGE-FASHION-GENZ.md`
+`~/.claude/ralph-templates/brunson-protocol/resources/ENGAGE-FASHION-GENZ.md`
 
 **You must READ and APPLY the 6-step Fashion Formula from that file:**
+
 1. **E** - Exploit Cognitive Disruption
 2. **N** - Narrate an Unfinished Story
 3. **G** - Give a Controversial Truth
@@ -233,8 +311,8 @@ If the product is fashion (clothing, shoes, accessories), you are **MANDATED** t
 
 **For General Products (Default 8 Pattern Interrupts):**
 
-| Type | Example |
-| :--- | :--- |
+| Type             | Example                                       |
+| :--------------- | :-------------------------------------------- |
 | Question         | "What if everything you knew was wrong?"      |
 | Contradiction    | "Everyone says X. They're wrong."             |
 | Shocking Stat    | "97% of women saw results in 30 days"         |
