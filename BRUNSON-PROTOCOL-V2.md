@@ -115,10 +115,11 @@ Execute in order. Do NOT skip phases.
    - Fill it out completely using `context/research-summary.md` as source.
 
 2. **Self-Correction (The Ralph Loop):**
-   - Review your `copy-manuscript.md`.
-   - **Check Headlines:** Does every headline use an ENGAGE pattern? (Question, Contradiction, Confession, etc.)
+   - **EXECUTE SCRIPT:** `bash tests/lint-manuscript.sh context/copy-manuscript.md`
+   - **Check Headlines:** Do they match the `ENGAGE-FASHION-GENZ.md` formulas?
    - **Check Story:** Does the Epiphany Bridge follow the 5-step narrative arc?
    - **Check Secrets:** Do they address Objections (Vehicle/Internal/External)?
+   - **Refine:** If the script fails, you MUST rewrite key sections before proceeding.
 
 3. **Validation:**
    - Only proceed if the manuscript is "Editor Approved" by your own internal critique.
