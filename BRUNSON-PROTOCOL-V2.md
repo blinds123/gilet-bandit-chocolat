@@ -309,6 +309,12 @@ If the product is fashion (clothing, shoes, accessories), you are **MANDATED** t
 5. **G** - Guarantee Unconventional Payoff
 6. **E** - Embed Time-Locked Curiosity
 
+**CRITICAL FOR FEATURE CARDS:**
+Use the **Mini-ENGAGE Distributed Formula**:
+- **Headline:** Must be **E (Exploit)** or **G (Truth)**.
+- **Body:** Must handle **Pivot (Attach)** and **Payoff (Guarantee)**.
+- **Reference:** `~/.gemini/antigravity/skills/brunson-protocol/resources/MINI-ENGAGE.md`
+
 **For General Products (Default 8 Pattern Interrupts):**
 
 | Type             | Example                                       |
