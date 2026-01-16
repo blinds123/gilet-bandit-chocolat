@@ -38,6 +38,23 @@
       --color-background: 255, 255, 255;
       --gradient-background: #ffffff;
     }
+
+    /* Epiphany Box Styling */
+    .epiphany-box {
+      background: linear-gradient(135deg, #f8f4ff 0%, #f0e8ff 100%);
+      border-left: 4px solid #6d388b;
+      padding: 16px 20px;
+      margin: 20px 0;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+    }
+
+    .epiphany-box strong {
+      color: #6d388b;
+      font-style: normal;
+      display: block;
+      margin-bottom: 8px;
+    }
   </style>
   <div
     id="image-with-text-template--17453745111139__image_with_text_BJDyRi"
@@ -58,7 +75,7 @@
           >
             <img
               src="{{FOUNDER_IMAGE}}"
-              alt=""
+              alt="Founder Story"
               srcset="
                 {{FOUNDER_IMAGE}}  165w,
                 {{FOUNDER_IMAGE}}  360w,
@@ -87,8 +104,12 @@
               {{FOUNDER_SECTION_HEADING}}
             </h2>
             <div class="image-with-text__text rte body">
-              <p>{{FOUNDER_SECTION_PARAGRAPH_1}}</p>
-              <p>{{FOUNDER_SECTION_PARAGRAPH_2}}</p>
+              <p>{{FOUNDER_BACKSTORY}}</p>
+              <p>{{FOUNDER_WALL}}</p>
+              <div class="epiphany-box">{{FOUNDER_EPIPHANY}}</div>
+              <p>{{FOUNDER_PLAN}}</p>
+              <p>{{FOUNDER_TRANSFORMATION}}</p>
+              <p><em>{{FOUNDER_INVITATION}}</em></p>
             </div>
           </div>
         </div>

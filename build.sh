@@ -48,7 +48,7 @@ MISSING=""
 [ -z "$BRAND_NAME" ] && MISSING="$MISSING BRAND_NAME"
 [ -z "$SINGLE_PRICE" ] && MISSING="$MISSING SINGLE_PRICE"
 [ -z "$BUNDLE_PRICE" ] && MISSING="$MISSING BUNDLE_PRICE"
-[ -z "$NETLIFY_SITE_ID" ] && MISSING="$MISSING NETLIFY_SITE_ID"
+#[ -z "$NETLIFY_SITE_ID" ] && MISSING="$MISSING NETLIFY_SITE_ID"
 [ -z "$GUARANTEE_NAME" ] && MISSING="$MISSING GUARANTEE_NAME"
 [ -z "$GUARANTEE_CONDITION" ] && MISSING="$MISSING GUARANTEE_CONDITION"
 [ -z "$REVIEW_COUNT" ] && MISSING="$MISSING REVIEW_COUNT"
@@ -89,11 +89,11 @@ fi
 if command -v cwebp &> /dev/null; then
     find images -name "*.png" -type f 2>/dev/null | while read file; do
         output="${file%.png}.webp"
-        [ ! -f "$output" ] && cwebp -q 80 "$file" -o "$output" 2>/dev/null
+        [ ! -f "$output" ] && cwebp -q 80 "$file" -o "$output" 2>/dev/null || true
     done
     find images -name "*.jpg" -type f 2>/dev/null | while read file; do
         output="${file%.jpg}.webp"
-        [ ! -f "$output" ] && cwebp -q 80 "$file" -o "$output" 2>/dev/null
+        [ ! -f "$output" ] && cwebp -q 80 "$file" -o "$output" 2>/dev/null || true
     done
     echo "   ✅ Images optimized"
 fi
@@ -103,6 +103,12 @@ echo ""
 # STEP 3: Build HTML with replacements
 # ============================================
 echo "📄 Building index.html..."
+
+# Handle Comparison Section Visibility
+if [ "$COMPARISON_SECTION_VISIBLE" == "false" ]; then
+    echo "   ⚠️ Comparison section disabled (config)"
+    rm -f sections/06-comparison.html
+fi
 
 # Concatenate all sections
 cat sections/*.html > index.html
@@ -205,16 +211,42 @@ replace_var "{{HERO_FEATURE_4}}" "$HERO_FEATURE_4"
 # =====================================================
 # FEATURES
 # =====================================================
+# =====================================================
+# FEATURES (Micro Grid) & SECRETS (Macro Sections)
+# =====================================================
+# MICRO GRID HEADLINES
 replace_var "{{FEATURE_HEADLINE_1}}" "$FEATURE_HEADLINE_1"
 replace_var "{{FEATURE_HEADLINE_2}}" "$FEATURE_HEADLINE_2"
 replace_var "{{FEATURE_HEADLINE_3}}" "$FEATURE_HEADLINE_3"
 replace_var "{{FEATURE_HEADLINE_4}}" "$FEATURE_HEADLINE_4"
-replace_var "{{FEATURE_HEADING_1}}" "$FEATURE_HEADING_1"
-replace_var "{{FEATURE_HEADING_2}}" "$FEATURE_HEADING_2"
-replace_var "{{FEATURE_PARAGRAPH_1_1}}" "$FEATURE_PARAGRAPH_1_1"
-replace_var "{{FEATURE_PARAGRAPH_1_2}}" "$FEATURE_PARAGRAPH_1_2"
-replace_var "{{FEATURE_PARAGRAPH_2}}" "$FEATURE_PARAGRAPH_2"
-replace_var "{{FEATURE_BENEFIT_TEXT}}" "$FEATURE_BENEFIT_TEXT"
+
+# MACRO SECRETS (New SECRET_ Variables)
+replace_var "{{SECRET_HEADLINE_1}}" "$SECRET_HEADLINE_1"
+replace_var "{{SECRET_HEADING_1}}" "$SECRET_HEADING_1"
+replace_var "{{SECRET_PARAGRAPH_1}}" "$SECRET_PARAGRAPH_1"
+replace_var "{{SECRET_PARAGRAPH_1_2}}" "$SECRET_PARAGRAPH_1_2"
+replace_var "{{SECRET_IMAGE_1}}" "$SECRET_IMAGE_1"
+
+replace_var "{{SECRET_HEADLINE_2}}" "$SECRET_HEADLINE_2"
+replace_var "{{SECRET_HEADING_2}}" "$SECRET_HEADING_2"
+replace_var "{{SECRET_PARAGRAPH_2}}" "$SECRET_PARAGRAPH_2"
+replace_var "{{SECRET_PARAGRAPH_2_2}}" "$SECRET_PARAGRAPH_2_2"
+replace_var "{{SECRET_IMAGE_2}}" "$SECRET_IMAGE_2"
+
+replace_var "{{SECRET_HEADLINE_3}}" "$SECRET_HEADLINE_3"
+replace_var "{{SECRET_HEADING_3}}" "$SECRET_HEADING_3"
+replace_var "{{SECRET_PARAGRAPH_3}}" "$SECRET_PARAGRAPH_3"
+replace_var "{{SECRET_PARAGRAPH_3_2}}" "$SECRET_PARAGRAPH_3_2"
+replace_var "{{SECRET_BENEFIT_TEXT}}" "$SECRET_BENEFIT_TEXT"
+replace_var "{{SECRET_IMAGE_3}}" "$SECRET_IMAGE_3" 
+
+# Legacy mappings (just in case templates still use them temporarily)
+replace_var "{{FEATURE_HEADING_1}}" "$SECRET_HEADING_1"
+replace_var "{{FEATURE_HEADING_2}}" "$SECRET_HEADING_2"
+replace_var "{{FEATURE_PARAGRAPH_1_1}}" "$SECRET_PARAGRAPH_1"
+replace_var "{{FEATURE_PARAGRAPH_1_2}}" "$SECRET_PARAGRAPH_1_2"
+replace_var "{{FEATURE_PARAGRAPH_2}}" "$SECRET_PARAGRAPH_2"
+replace_var "{{FEATURE_BENEFIT_TEXT}}" "$SECRET_BENEFIT_TEXT"
 
 # =====================================================
 # FOUNDER SECTION (Epiphany Bridge)
@@ -222,6 +254,12 @@ replace_var "{{FEATURE_BENEFIT_TEXT}}" "$FEATURE_BENEFIT_TEXT"
 replace_var "{{FOUNDER_SECTION_HEADING}}" "$FOUNDER_SECTION_HEADING"
 replace_var "{{FOUNDER_SECTION_PARAGRAPH_1}}" "$FOUNDER_SECTION_PARAGRAPH_1"
 replace_var "{{FOUNDER_SECTION_PARAGRAPH_2}}" "$FOUNDER_SECTION_PARAGRAPH_2"
+replace_var "{{FOUNDER_BACKSTORY}}" "$FOUNDER_BACKSTORY"
+replace_var "{{FOUNDER_WALL}}" "$FOUNDER_WALL"
+replace_var "{{FOUNDER_EPIPHANY}}" "$FOUNDER_EPIPHANY"
+replace_var "{{FOUNDER_PLAN}}" "$FOUNDER_PLAN"
+replace_var "{{FOUNDER_TRANSFORMATION}}" "$FOUNDER_TRANSFORMATION"
+replace_var "{{FOUNDER_INVITATION}}" "$FOUNDER_INVITATION"
 replace_var "{{FOUNDER_BACKSTORY}}" "$FOUNDER_BACKSTORY"
 replace_var "{{FOUNDER_WALL}}" "$FOUNDER_WALL"
 replace_var "{{FOUNDER_EPIPHANY}}" "$FOUNDER_EPIPHANY"

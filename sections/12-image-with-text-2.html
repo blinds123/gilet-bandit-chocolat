@@ -2,6 +2,7 @@
   id="shopify-section-template--17453745111139__image_with_text_maMfND"
   class="shopify-section section"
 >
+  <!-- SECRET #1: VEHICLE (Why old products failed) -->
   <style data-shopify>
     .section-template--17453745111139__image_with_text_maMfND-padding {
       padding-top: 0px;
@@ -38,6 +39,15 @@
       --color-background: 255, 255, 255;
       --gradient-background: #ffffff;
     }
+
+    .secret-caption {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #6d388b;
+      margin-bottom: 8px;
+    }
   </style>
   <div
     id="image-with-text-template--17453745111139__image_with_text_maMfND"
@@ -57,15 +67,15 @@
             style="padding-bottom: 100%"
           >
             <img
-              src="{{FEATURE_IMAGE_1}}"
-              alt=""
+              src="{{SECRET_IMAGE_1}}"
+              alt="Secret 1 - Vehicle"
               srcset="
-                {{FEATURE_IMAGE_1}}  165w,
-                {{FEATURE_IMAGE_1}}  360w,
-                {{FEATURE_IMAGE_1}}  535w,
-                {{FEATURE_IMAGE_1}}  750w,
-                {{FEATURE_IMAGE_1}} 1070w,
-                {{FEATURE_IMAGE_1}} 1500w
+                {{SECRET_IMAGE_1}}  165w,
+                {{SECRET_IMAGE_1}}  360w,
+                {{SECRET_IMAGE_1}}  535w,
+                {{SECRET_IMAGE_1}}  750w,
+                {{SECRET_IMAGE_1}} 1070w,
+                {{SECRET_IMAGE_1}} 1500w
               "
               width="1024"
               height="1024"
@@ -80,15 +90,16 @@
             id="ImageWithText--template--17453745111139__image_with_text_maMfND"
             class="image-with-text__content image-with-text__content--top image-with-text__content--desktop-left image-with-text__content--mobile-left image-with-text__content--adapt gradient color-background-1 color-scheme-template--17453745111139__image_with_text_maMfND content-container"
           >
+            <p class="secret-caption">{{SECRET_HEADLINE_1}}</p>
             <h2
               class="image-with-text__heading h1 title-with-highlight"
               style="--hightlight-color: #000000"
             >
-              {{FEATURE_HEADING_1}}
+              {{SECRET_HEADING_1}}
             </h2>
             <div class="image-with-text__text rte body">
-              <p>{{FEATURE_PARAGRAPH_1_1}}</p>
-              <p>{{FEATURE_PARAGRAPH_1_2}}</p>
+              <p>{{SECRET_PARAGRAPH_1}}</p>
+              <p>{{SECRET_PARAGRAPH_1_2}}</p>
             </div>
           </div>
         </div>

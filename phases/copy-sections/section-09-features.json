@@ -1,0 +1,143 @@
+{
+  "section": "09-features",
+  "file": "sections/08-multirow.html",
+  "aka": "The Insider Feature Grid",
+
+  "MANDATORY_READS": [
+    "context/COPY-REQUIREMENTS.md",
+    "context/research-summary.md - USE EXACT LANGUAGE FROM VOICE & TONE"
+  ],
+
+  "STRATEGY": {
+    "level": "MICRO",
+    "purpose": "Handle objections LOGISTICALLY (the 'what')",
+    "tone": "Fashion Insider - Cognitive Disruption, NOT tech specs",
+    "contrast": "Macro Secrets handle objections PHILOSOPHICALLY (the 'why')"
+  },
+
+  "requirements": {
+    "feature_count": 4,
+    "words_per_card": "~40 words (Mini-ENGAGE)",
+    "images": "TESTIMONIAL images only (social proof) - NOT product shots"
+  },
+
+  "OBJECTION_MAPPING": {
+    "CRITICAL": "Each Micro Feature SUBTLY addresses an objection type",
+    "feature_1": {
+      "spec": "Quality/Construction (e.g., Zipper, Stitching, Hardware)",
+      "objection": "VEHICLE - Why other products' mechanisms fail",
+      "example_headline": "THE CHEAP ZIPPER",
+      "example_truth": "That $50 jacket? Its zipper will catch and stick within a month.",
+      "example_benefit": "Ours uses YKK hardware that glides for years."
+    },
+    "feature_2": {
+      "spec": "Cut/Structure (e.g., Rise, Silhouette, Shape)",
+      "objection": "INTERNAL - Why it'll work for HER body",
+      "example_headline": "THE 'DIAPER EFFECT'",
+      "example_truth": "Length isn't modesty; cut is modesty.",
+      "example_benefit": "Our curved rise covers you without looking boxy."
+    },
+    "feature_3": {
+      "spec": "Practicality (e.g., Pockets, Closures, Movement)",
+      "objection": "EXTERNAL - Practical concern removed",
+      "example_headline": "THE FAKE POCKET LIE",
+      "example_truth": "Decorative pockets are fashion's laziest trick.",
+      "example_benefit": "Real pockets that actually fit your phone."
+    },
+    "feature_4": {
+      "spec": "Details (e.g., Sleeves, Collar, Hem)",
+      "objection": "VEHICLE - Another mechanism that usually fails",
+      "example_headline": "THE ARM SQUEEZE",
+      "example_truth": "Tight sleeves aren't 'fitted' - they're poorly drafted.",
+      "example_benefit": "Our sleeve allows full movement without bulk."
+    }
+  },
+
+  "MINI_ENGAGE_FORMULA": {
+    "total_words": "~40 words per card",
+    "structure": {
+      "DISRUPTIVE_HEADLINE": {
+        "format": "THE [PROBLEM NAME]",
+        "examples": [
+          "THE CHEAP ZIPPER",
+          "THE 'DIAPER EFFECT'",
+          "THE FAKE POCKET LIE",
+          "THE ARM SQUEEZE"
+        ],
+        "rule": "Name the problem like an insider would"
+      },
+      "THE_TRUTH": {
+        "format": "[Counter-intuitive insight about why this matters]",
+        "examples": [
+          "Visible zippers aren't 'edgy' - they're lazy design.",
+          "Length isn't modesty; cut is modesty.",
+          "Decorative pockets are fashion's laziest trick."
+        ],
+        "rule": "Challenge a common belief with insider knowledge"
+      },
+      "THE_BENEFIT": {
+        "format": "Our [specific solution] [specific outcome].",
+        "examples": [
+          "Our hidden zipper keeps the line clean.",
+          "Our curved rise covers you without looking boxy.",
+          "Real pockets that actually fit your phone."
+        ],
+        "rule": "Show how THIS piece solves it - focus on FEELING"
+      }
+    }
+  },
+
+  "images": {
+    "CRITICAL": "MUST be testimonial/social proof images - NOT product shots",
+    "feature_1_image": "{{TESTIMONIAL_IMAGE_6}}",
+    "feature_2_image": "{{TESTIMONIAL_IMAGE_7}}",
+    "feature_3_image": "{{TESTIMONIAL_IMAGE_8}}",
+    "feature_4_image": "{{TESTIMONIAL_IMAGE_9}}",
+    "source": "images/testimonials/",
+    "WHY": "Social proof images show REAL women wearing it, building trust while explaining specs"
+  },
+
+  "variables_output": {
+    "MULTIROW_HEADLINE_1": "[Disruptive Headline for Feature 1]",
+    "MULTIROW_PARAGRAPH_1": "[Mini-ENGAGE copy: Truth + Benefit]",
+    "MULTIROW_IMAGE_1": "images/testimonials/testimonial-XX.webp",
+    "MULTIROW_HEADLINE_2": "[Disruptive Headline for Feature 2]",
+    "MULTIROW_PARAGRAPH_2": "[Mini-ENGAGE copy: Truth + Benefit]",
+    "MULTIROW_IMAGE_2": "images/testimonials/testimonial-XX.webp",
+    "MULTIROW_HEADLINE_3": "[Disruptive Headline for Feature 3]",
+    "MULTIROW_PARAGRAPH_3": "[Mini-ENGAGE copy: Truth + Benefit]",
+    "MULTIROW_IMAGE_3": "images/testimonials/testimonial-XX.webp",
+    "MULTIROW_HEADLINE_4": "[Disruptive Headline for Feature 4]",
+    "MULTIROW_PARAGRAPH_4": "[Mini-ENGAGE copy: Truth + Benefit]",
+    "MULTIROW_IMAGE_4": "images/testimonials/testimonial-XX.webp"
+  },
+
+  "tone_guidance": {
+    "write_like": "A fashion insider revealing industry secrets",
+    "voice": "Knowing, slightly provocative, confident",
+    "MUST_USE": "Exact language patterns from research-summary.md Voice & Tone",
+    "avoid": [
+      "tech specs language",
+      "feature/benefit lists",
+      "generic marketing speak",
+      "product shots in this section"
+    ],
+    "use": [
+      "insider terminology",
+      "problem naming (THE [X] EFFECT)",
+      "counter-intuitive truths",
+      "cognitive disruption"
+    ]
+  },
+
+  "anti_laziness_check": [
+    "Does each headline NAME a problem like an insider would?",
+    "Does each Truth challenge a common belief?",
+    "Does each Benefit focus on how she'll FEEL?",
+    "Did I map each feature to its objection type (Vehicle/Internal/External)?",
+    "Am I using TESTIMONIAL images, not product shots?",
+    "Is the copy ~40 words per card (not too long)?",
+    "Did I use language from the research Voice & Tone section?",
+    "Would a fashion-savvy woman read this and think 'finally, someone who gets it'?"
+  ]
+}
