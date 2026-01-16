@@ -1,89 +1,215 @@
-# Brunson Protocol v2.0 - Template Instructions
+---
+name: brunson-protocol
+description: Universal landing page generator using Russell Brunson frameworks (Big Domino, 3 Secrets, Epiphany Bridge), ENGAGE copywriting. Generates fully deployed landing pages from competitor analysis.
+version: 2.0
+---
 
-> **READ THIS FILE** when using this template with Claude or Antigravity skills.
+# Brunson-Protocol Landing Page Generator v2.0
 
-## File Architecture
+## When This Skill Activates
 
-| HTML File                   | Content             | Variables               |
-| --------------------------- | ------------------- | ----------------------- |
-| `08-multirow.html`          | 4 Micro Features    | `FEATURE_`, `MULTIROW_` |
-| `11-image-with-text-1.html` | Founder Story       | `FOUNDER_`              |
-| `12-image-with-text-2.html` | Secret 1 (Vehicle)  | `SECRET_..._1`          |
-| `13-image-with-text-3.html` | Secret 2 (Internal) | `SECRET_..._2`          |
-| `13b-secret-3.html`         | Secret 3 (External) | `SECRET_..._3`          |
+This skill activates when the user requests:
 
-## Psychological Flow
+- "Build a landing page from [competitor URL]"
+- "Create a brunson-protocol page"
+- "Generate a sales page using Russell Brunson frameworks"
+
+## CRITICAL: First Action (Self-Healing Injection)
+
+**IMMEDIATELY after cloning/creating project, inject the corrected section files:**
+
+```bash
+cp resources/sections/*.html sections/
+cp build.sh .
+```
+
+This ensures the correct file structure (11, 12, 13, 13b) regardless of template version.
+
+## Required Inputs
+
+Before starting, verify the user has:
+
+1. **Competitor URL** - Product page to analyze
+2. **35+ images** organized in folders:
+   - `images/product/` (5+ images) - ALSO USED AS HERO IMAGES
+   - `images/testimonials/` (25 images) - Features, Secrets, Testimonials
+   - `images/order-bump/` (1+ images) - Order bump product image ONLY
+   - `images/founder/` (1 image) - Founder story section ONLY
+   - `images/comparison/` (2 images) - **OPTIONAL** (see Comparison Check below)
+   - `images/universal-assets/` (trust badges, press logos)
+
+### Comparison Check (NEW in v2.0)
+
+The comparison section (06) requires 2 images. **If missing:**
+
+- Set `COMPARISON_SECTION_VISIBLE=false` in product.config
+- OR ask user to provide before/after images
+- **DO NOT block the build** - comparison is optional
+
+## File Architecture (v2.0)
+
+**CRITICAL: Section 17 no longer exists. Secret 3 is now 13b.**
+
+| HTML File                   | Content Goal          | Variable Prefix         |
+| :-------------------------- | :-------------------- | :---------------------- |
+| `08-multirow.html`          | Micro Features (Grid) | `FEATURE_`, `MULTIROW_` |
+| `11-image-with-text-1.html` | Founder Story         | `FOUNDER_`              |
+| `12-image-with-text-2.html` | Secret 1 (Vehicle)    | `SECRET_..._1`          |
+| `13-image-with-text-3.html` | Secret 2 (Internal)   | `SECRET_..._2`          |
+| `13b-secret-3.html`         | Secret 3 (External)   | `SECRET_..._3`          |
+| `14-faq.html`               | FAQ (Logistics)       | `FAQ_`                  |
+
+**Psychological Flow:**
 
 ```
 Founder Story (11) → Earns Trust
-Secret 1 (12) → Fixes "It won't work"
-Secret 2 (13) → Fixes "I can't do it"
-Secret 3 (13b) → Fixes "Too expensive"
-FAQ (14) → Cleanup objections
+Secret 1 (12) → "It won't work" objection
+Secret 2 (13) → "I can't do it" objection
+Secret 3 (13b) → "Too expensive" objection
+FAQ (14) → Cleanup remaining objections
 ```
 
-## CRITICAL RULES
+## Execution Phases
 
-### 1. No Framework Labels
+Execute in order. Do NOT skip phases.
 
-NEVER write "The Backstory:", "THE EPIPHANY:", "The Result:" in copy.
-The framework guides THINKING, not WRITING.
+### Phase 0: Pre-Check
 
-### 2. No Placeholder Bugs
+- **Inject resources:** `cp resources/sections/*.html sections/`
+- Verify images directory exists
+- Test competitor URL is accessible
+- Create workspace folders: `sections/`, `context/`
+- **Comparison Check:** If `images/comparison/` empty, note for config
 
-- `$00` → Use real price like `$600`
-- `XX months` → Use real number
-- `[amount]` → Fill with actual data
+### Phase 1: Research (CRITICAL)
 
-### 3. Variable Separation
+- Navigate to competitor URL using browser
+- Scroll entire page slowly, take screenshots
+- Extract and document in `context/research-summary.md`:
+  - 5+ Pain Points (exact customer language)
+  - 4+ Desires (transformation outcomes)
+  - 6+ Objections with answers
+  - Big Domino (ONE belief shift)
+  - 3 Secrets (Vehicle/Internal/External)
+  - Epiphany Bridge (5 story elements)
+  - Voice & Tone patterns
+  - Dream Customer profile
 
-- Micro Grid: `MULTIROW_IMAGE_1..4`
-- Secrets: `SECRET_IMAGE_1..3`
-- Never use `FEATURE_IMAGE` for secrets
+**STOP and ask user to review research before proceeding.**
 
-### 4. Config Order
+### Phase 2: Copy Drafting (THE INTERMEDIATE ARTIFACT)
 
-Place at TOP of product.config:
+**CRITICAL RULE:** You are **FORBIDDEN** from writing copy directly into `product.config`.
+**REASON:** Configuration files kill creativity. You must write a manuscript first.
 
-- All `FOUNDER_` variables
-- All `SLIDESHOW_` variables
-- All `CTA_` variables
+1. **Create Manuscript:**
+   - Copy template: `cp ~/.gemini/antigravity/skills/brunson-protocol/resources/copy-manuscript.template.md context/copy-manuscript.md`
+   - Fill it out completely using `context/research-summary.md` as source.
 
-### 5. Comparison Optional
+2. **Self-Correction (The Ralph Loop):**
+   - Review your `copy-manuscript.md`.
+   - **Check Headlines:** Does every headline use an ENGAGE pattern? (Question, Contradiction, Confession, etc.)
+   - **Check Story:** Does the Epiphany Bridge follow the 5-step narrative arc?
+   - **Check Secrets:** Do they address Objections (Vehicle/Internal/External)?
 
-If `images/comparison/` is empty:
+3. **Validation:**
+   - Only proceed if the manuscript is "Editor Approved" by your own internal critique.
 
-- Set `COMPARISON_SECTION_VISIBLE=false`
-- Do NOT block the build
+### Phase 3: Configuration (Mapping)
 
-## Founder Story Variables
+1. **Map Manuscript to Config:**
+   - NOW you may open `product.config`.
+   - Copy/Paste your polished text from `context/copy-manuscript.md` into the variables.
+   - **DO NOT** rewrite or "summarize" while pasting. Move the exact text.
 
-```
-FOUNDER_SECTION_HEADING
-FOUNDER_BACKSTORY
-FOUNDER_WALL
-FOUNDER_EPIPHANY
-FOUNDER_PLAN
-FOUNDER_TRANSFORMATION
-FOUNDER_INVITATION
-FOUNDER_IMAGE
-```
+2. **CRITICAL: Place these at TOP of product.config:**
+   - All `FOUNDER_` variables
+   - All `SLIDESHOW_` variables
+   - All `CTA_` variables
+3. **HARDCODED VALUES (DO NOT CHANGE):**
+   - `SINGLE_PRICE=19`
+   - `ORDER_BUMP_PRICE=10`
+   - `ORDER_BUMP_PRECHECKED=true`
 
-## Secret Variables (per secret)
+### Phase 4: Build & Deploy
 
-```
-SECRET_HEADLINE_X     (Eyebrow caption)
-SECRET_HEADING_X      (Main H2 title)
-SECRET_PARAGRAPH_X    (First paragraph)
-SECRET_PARAGRAPH_X_2  (Second paragraph)
-SECRET_IMAGE_X
-SECRET_BENEFIT_TEXT   (Secret 3 only)
-```
+- Run: `bash build.sh`
+- Verify zero unfilled placeholders
+- Deploy to Netlify
 
-## Build Command
+### Phase 5: Browser Testing
 
-```bash
-bash build.sh
-```
+Test in **mobile viewport 375x667**:
 
-Concatenates all `sections/*.html` alphabetically → `index.html`
+- Page loads without errors
+- All images load (zero 404s)
+- Zero console errors
+- Mobile responsive (no horizontal scroll)
+- Add to Cart functional
+- Order bump is pre-checked
+
+## Russell Brunson Frameworks
+
+### Big Domino
+
+The ONE belief that makes everything else fall into place.
+
+- Format: "The problem isn't X, it's Y"
+- If they believe THIS, they buy
+
+### 3 Secrets
+
+1. **Vehicle (Secret 1)** - Why other products failed them
+2. **Internal (Secret 2)** - Why it's not their fault
+3. **External (Secret 3)** - What external factors held them back
+
+### Epiphany Bridge
+
+Founder story with 5 elements. **DO NOT label these explicitly in copy:**
+
+1. Backstory - Same problem as customer
+2. Wall - What they tried that failed
+3. Epiphany - The "aha" moment
+4. Plan - How product was born
+5. Transformation - Result achieved
+
+**CRITICAL:** The framework guides your THINKING, not your WRITING. Never write "The Backstory:" or "THE EPIPHANY:" - let the narrative flow naturally.
+
+## BANNED - AI Placeholder Bugs
+
+**NEVER write these:**
+
+- `$00` or `00 designer` → Use REAL prices like `$600`
+- `XX months` or `XX%` → Use REAL numbers from research
+- `[amount]` or `[number]` → Fill in with actual data
+- `The Backstory:` or `THE EPIPHANY:` → NO framework labels
+- `The Result:` or `The Plan:` → Framework is INVISIBLE
+
+## Variable Collision Prevention
+
+**STRICTLY ENFORCE:**
+
+- **Micro Grid (08)** uses `MULTIROW_IMAGE_1..4`
+- **Macro Secrets (12, 13, 13b)** use `SECRET_IMAGE_1..3`
+- **DO NOT** use generic `FEATURE_IMAGE` for secrets
+
+## ENGAGE Framework (Perry Belcher)
+
+8 pattern interrupt types - use throughout copy:
+
+| Type             | Example                                       |
+| ---------------- | --------------------------------------------- |
+| Question         | "What if everything you knew was wrong?"      |
+| Contradiction    | "Everyone says X. They're wrong."             |
+| Shocking Stat    | "97% of women saw results in 30 days"         |
+| Unexpected Claim | "You don't need [expected solution]"          |
+| Reader Callout   | "If you're reading this, you already know..." |
+| Confession       | "Here's what nobody talks about..."           |
+| Time Travel      | "Imagine 30 days from now..."                 |
+| Permission       | "It's okay to want this for yourself"         |
+
+## Reference Files
+
+- `resources/sections/` - Self-healing HTML sections (11, 12, 13, 13b)
+- `references/COPY-REQUIREMENTS.md` - Mandatory copy rules
+- `references/research-summary.template.md` - Phase 1 template
