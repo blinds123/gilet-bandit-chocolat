@@ -97,6 +97,14 @@ Execute in order. Do NOT skip phases.
 
 **STOP and ask user to review research before proceeding.**
 
+### Phase 1B: Deep Dive Avatar Research (THE PSYCHOLOGICAL LOCK)
+**MANDATORY:** You must perform the deep psychological audit before writing copy.
+1. Read: `~/.gemini/antigravity/skills/brunson-protocol/resources/DEEP-DIVE-AVATAR.md`
+2. Execute the research prompt mentally.
+3. **Generate Artifact:** Create `context/avatar-profile.json` with the full 7-section analysis.
+4. **Validation:** Ensure the JSON is valid and contains deep insights, not generic summaries.
+
+
 ### Phase 2: Copy Drafting (THE INTERMEDIATE ARTIFACT)
 
 **CRITICAL RULE:** You are **FORBIDDEN** from writing copy directly into `product.config`.
