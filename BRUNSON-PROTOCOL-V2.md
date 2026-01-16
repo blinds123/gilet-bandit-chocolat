@@ -131,13 +131,28 @@ Execute in order. Do NOT skip phases.
    - `ORDER_BUMP_PRICE=10`
    - `ORDER_BUMP_PRECHECKED=true`
 
-### Phase 4: Build & Deploy
+### Phase 4: multi-Stage Validation (The Defense-in-Depth)
+
+**Layer 1: The Manuscript Linter (Pre-Config)**
+- **Action:** Run `bash tests/lint-manuscript.sh context/copy-manuscript.md`
+- **Check:** Verifies all 3 Secrets are filled, Epiphany Bridge has 5 steps, and Big Domino exists.
+- **Enforcement:** You CANNOT open `product.config` until this passes.
+
+**Layer 2: The Config Validator (Pre-Build)**
+- **Action:** Run `bash tests/validate-config.sh`
+- **Check:** Verifies critical variables (PRICE, GUARANTEE) match hardcoded values.
+- **Enforcement:** `build.sh` will auto-abort if variables are suspect.
+
+### Phase 5: Build & Deploy
 
 - Run: `bash build.sh`
+- **Layer 3: The HTML Validator (Post-Build)**
+  - **Action:** `bash tests/validate-engage.sh index.html 3`
+  - **Check:** Greps the final HTML for specific Hook patterns.
 - Verify zero unfilled placeholders
 - Deploy to Netlify
 
-### Phase 5: Browser Testing
+### Phase 6: Browser Testing
 
 Test in **mobile viewport 375x667**:
 
